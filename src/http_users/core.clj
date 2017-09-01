@@ -7,9 +7,9 @@
          '[clojure.data.csv :as csv]
          '[clojure.java.io :as io])
 
-(def user-data "/var/www/json/user-data.json")
-
-
+;(def user-data "/var/www/json/user-data.json")
+(def user-data (.getFile (clojure.java.io/resource "user-data.json")))
+(def port 8080)
 
 (defn user-to-html [user]
   (str "<li>" (get user "user") ":" (get user "password") "</li>\n"))
@@ -55,4 +55,5 @@
 (defn -main
   "List and add user to /var/www/json/user-data.json"
   [& args]
-  (http/run-server app {:port 8080}))
+  (println "Starting server in port " port)
+  (http/run-server app {:port port}))
