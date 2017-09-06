@@ -5,7 +5,7 @@
          '[clojure.data.json :as json]
          '[hiccup.core :as h])
 
-(def port 8080)
+(defonce port 8080)
 (def all-users (atom {:tero "passu" :pasi "ppaswd" :harri "wdp"}))
 (def page-count (atom 0))
 
