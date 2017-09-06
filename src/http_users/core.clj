@@ -47,7 +47,8 @@
     (swap! users assoc (keyword (nth (first user) 1)) (nth (second user) 1))))
   
 ; json API:  
-; "{\"users\":[{\"user\":\"aaafaska\",\"password\":\"aaapasswood\"}, {\"user\":\"aaayeeso\",\"password\":\"aaaenkerro\"}]}"
+; # curl -X post --data '{"users":[{"user":"aaafaska","password":"aaapasswood"}, {"user":"aaayeeso","password":"aaaenkerro"}]}' http://localhost:8080 
+
 (defn handle-post-new [req] 
   (let [ json-data (slurp (:body req)) 
          new-users (json/read-str json-data) ]
