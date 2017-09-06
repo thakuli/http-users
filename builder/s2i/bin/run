@@ -1,0 +1,5 @@
+#!/bin/bash
+
+EXECUTABLE_JAR=/opt/clojure-jar.conf
+
+exec java -jar $(cat $EXECUTABLE_JAR)
