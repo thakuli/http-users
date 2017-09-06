@@ -11,7 +11,8 @@
 ;(def user-data "/var/www/json/user-data.json")
 ;(def user-data (.getFile (clojure.java.io/resource "user-data.json")))
 
-(def user-data (io/file (io/resource "user-data.json")))
+;(def user-data (io/file (io/resource "user-data.json")))
+(def user-data 0)
 (def port 8080)
 
 (defn user-to-html [user]
