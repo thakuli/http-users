@@ -6,18 +6,18 @@
          '[hiccup.core :as h])
 
 (def port 8080)
-(def users (atom {:tero "passu" :pasi "ppaswd" :harri "wdp"}))
+(def all-users (atom {:tero "passu" :pasi "ppaswd" :harri "wdp"}))
 (def page-count (atom 0))
 
 
 (defn print-users []
-  (doseq [ user  @users ]
+  (doseq [ user  @all-users ]
     (println (str (first user) " " (second user)))))
 
 (defn users->table [users]
   [:table 
            [:tr [:td "User"] [:td "Password"] ]
-            (for [user @users] 
+            (for [user @all-users] 
               (let [k (first user)
                     v (second user)]
                 [:tr [:td k ] [:td v] ]))])
@@ -44,7 +44,7 @@
 
 (defn add-users-to-atom! [new-users]
   (doseq [user (get new-users "users")]
-    (swap! users assoc (keyword (nth (first user) 1)) (nth (second user) 1))))
+    (swap! all-users assoc (keyword (nth (first user) 1)) (nth (second user) 1))))
   
 ; json API:  
 ; # curl -X post --data '{"users":[{"user":"aaafaska","password":"aaapasswood"}, {"user":"aaayeeso","password":"aaaenkerro"}]}' http://localhost:8080 
@@ -54,16 +54,16 @@
          new-users (json/read-str json-data) ]
     (add-users-to-atom! new-users)
     (http-reply 200 {"Content-Type" "text/html"} 
-                (h/html (html-page "System users" users)))))
+                (h/html (html-page "System users" all-users)))))
 
 (defn app [req]
   (if (= (:request-method req) :get)
     (http-reply 200 {"Content-Type" "text/html"} 
-                (h/html (html-page "System users" users)))
+                (h/html (html-page "System users" all-users)))
     (handle-post-new req)))
 
 (defn -main
-  "List and add user to /var/www/json/user-data.json"
+  "List and add users"
   [& args]
   (println "Starting server in port " port)
   (http/run-server app {:port port}))
