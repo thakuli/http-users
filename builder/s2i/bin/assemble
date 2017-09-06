@@ -8,7 +8,7 @@ pushd $SOURCE_DIR
 lein uberjar
 
 STANDALONE_JAR=$(find $SOURCE_DIR -name "*standalone.jar")
-echo $STANDALONE_JAR > $EXECUTABLE_JAR
+echo $STANDALONE_JAR ${OPTS} > $EXECUTABLE_JAR
 
 rc=0
 exit $rc
