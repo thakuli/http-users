@@ -6,7 +6,8 @@
   :dependencies [[org.clojure/clojure "1.8.0"]  
                  [http-kit "2.2.0"]
                  [org.clojure/data.json "0.2.6"] 
-                 [org.clojure/data.csv "0.1.4"] ]
+                 [org.clojure/data.csv "0.1.4"] 
+                 [hiccup "1.0.5"] ]
   :main ^:skip-aot http-users.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}}
