@@ -1,0 +1,43 @@
+{
+    "kind": "ImageStream",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "leiningen",
+        "generation": 5,
+        "creationTimestamp": null,
+        "annotations": {
+            "openshift.io/display-name": "Leiningen",
+            "openshift.io/image.dockerRepositoryCheck": ""
+        }
+    },
+    "spec": {
+        "lookupPolicy": {
+            "local": false
+        },
+        "tags": [
+            {
+                "name": "latest",
+                "annotations": {
+                    "description": "Builds Clojure app using Leiningen.",
+                    "iconClass": "icon-nodejs",
+                    "openshift.io/display-name": "Leiningen (Latest)",
+                    "sampleRepo": "https://github.com/thakuli/http-users.git",
+                    "supports": "clojure,leiningen",
+                    "tags": "builder,clojure,leiningen"
+                },
+                "from": {
+                    "kind": "DockerImage",
+                    "name": "epor.netact.nsn-rdnet.net:5000/openshift3/leiningen-builder"
+                },
+                "generation": 1,
+                "importPolicy": {},
+                "referencePolicy": {
+                    "type": "Source"
+                }
+            }
+        ]
+    },
+    "status": {
+        "dockerImageRepository": ""
+    }
+}

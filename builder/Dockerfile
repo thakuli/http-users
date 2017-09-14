@@ -7,10 +7,14 @@ LABEL io.k8s.description="Platform for building and running Clojure apps with Le
       io.openshift.tags="builder,leiningen,clojure" \
       io.openshift.s2i.destination="/opt/s2i/destination"
 
+EXPOSE 8080
 
 ENV http_proxy http://10.144.1.10:8080
 ENV https_proxy https://10.144.1.10:8080
 ENV LEIN_ROOT true
+
+#RUN useradd -r -u 1101 leiningen 
+#USER leiningen
 
 RUN yum -y update && yum clean all
 
@@ -20,4 +24,5 @@ RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 RUN mkdir -p /opt/s2i/destination
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 
+#USER leiningen
 CMD $STI_SCRIPTS_PATH/usage
